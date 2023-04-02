@@ -13,7 +13,7 @@ router.post('/create', function(req, res, next) {
   var sql = 'INSERT INTO users SET ?';
   db.query(sql, userDetails,function (err, data) { 
       if (err) throw err;
-         console.log("User dat is inserted successfully "); 
+         console.log("User data is inserted successfully "); 
   });
  res.redirect('/users/form');  // redirect to user form page after inserting the data
 }); 

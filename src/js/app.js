@@ -210,16 +210,18 @@ App = {
 
   // ------------- adding candidate code -------------
   addCandidate: function(){
+    $("#candidate_success").removeAttr('hidden');
+    
     $("#loader").hide();
     var name=$('#name').val();
     var age = $('#age').val();
     var party = $('#party').val();
     var qualification = $('#qualification').val();
-    
+    console.log(name, age, party,"he.lo", qualification);
     App.contracts.Contest.deployed().then(function(instance){
       return instance.addContestant(name,party,age,qualification);
     }).then(function(result){
-      $("#loader").show();
+      $("#candidate_success").show();
       $('#name').val('');
       $('#age').val('');
       $('#party').val('');

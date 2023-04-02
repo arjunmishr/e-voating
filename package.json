@@ -9,12 +9,13 @@
   "scripts": {
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && concurrently \"tsc -w\" \"lite-server -c bs-config.js\" "
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server -c config.js\" "
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.6.0"
+    "lite-server": "^2.6.0",
+    "typescript": "^5.0.3"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

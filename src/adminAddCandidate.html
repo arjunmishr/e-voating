@@ -107,7 +107,7 @@
                       <div class="row mb-4">
                         <div class="col">
                           <div class="form-outline">
-                            <input type="text" id="age" class="form-control" required />
+                            <input type="number" min="18" max="100" id="age" class="form-control" required />
                             <label class="form-label" for="form3Example1">Age</label>
                           </div>
                         </div>
@@ -124,12 +124,10 @@
                       </div>
                     </form>
                   </div>
-                  <div class="alert alert-success" id="loader">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <!-- <i class="material-icons">close</i> -->
-                    </button>
-                    <span>
-                      <b> Candidate </b> has been added Successfully....!</span>
+                  <div class="alert alert-success" id="candidate_success" hidden="true">
+                    <span >
+                      <b> Candidate </b> has been added Successfully....!
+                    </span>
                   </div>
                 </div>
               </div>
