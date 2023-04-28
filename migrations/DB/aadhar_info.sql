@@ -5,4 +5,4 @@ CREATE TABLE `aadhar`.`aadhar_info` (
   `Email` VARCHAR(45) NULL,
   `Is_registered` TINYINT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) );

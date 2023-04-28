@@ -7,6 +7,5 @@ CREATE TABLE `aadhar`.`registration` (
     `password` VARCHAR(45) NOT NULL,
     `confirm_password` VARCHAR(45) NULL,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `email_address_UNIQUE` (`email_address` ASC) VISIBLE,
-    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
-  
+    UNIQUE INDEX `email_address_UNIQUE` (`email_address` ASC) ,
+    UNIQUE INDEX `id_UNIQUE` (`id` ASC) );  
