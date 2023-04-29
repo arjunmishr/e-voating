@@ -5,15 +5,15 @@ App = {
   account:0x0,
 
   init: async function() {
-    // Load pets.
-   
+    console.log("came to init function")
     return await App.initWeb3();
   },
 
   initWeb3: async function() {
+    console.log("came to initWeb3 function")
     if (window.ethereum) {
       try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
         setAccounts(accounts);
       } catch (error) {
         if (error.code === 4001) {
@@ -21,18 +21,16 @@ App = {
         }
       }
     }
-
-    return App.initContract();
+    return await App.initContract();
   },
 
-  initContract: function() {
-    
-    $.getJSON("Contest.json",function(contest){
+  initContract: async function() {
+    console.log("came to initContract function")
+    let web3Provider = await detectEthereumProvider();
+    $.getJSON("Contest.json", function(contest){
       App.contracts.Contest=TruffleContract(contest);
 
-      App.contracts.Contest.setProvider(web3.currentProvider);
-
-  
+      App.contracts.Contest.setProvider(web3Provider);  
       return App.render();
     });
   },
@@ -45,10 +43,12 @@ App = {
     loader.show();
     content.hide();
     $("#after").hide();
+    const web3 = new Web3(window.ethereum);
 
     web3.eth.getCoinbase(function(err,account){
       if(err===null){
         App.account=account;
+        console.log("🚀 ~ file: app.js:51 ~ web3.eth.getCoinbase ~ account:", account)
         $("#accountAddress").html("Your account: "+account);
       }
     });
@@ -218,14 +218,19 @@ App = {
     var party = $('#party').val();
     var qualification = $('#qualification').val();
     console.log(name, age, party,"he.lo", qualification);
+
     App.contracts.Contest.deployed().then(function(instance){
+      console.log("🚀 ~ file: app.js:222 ~ App.contracts.Contest.deployed ~ instance:", instance)
       return instance.addContestant(name,party,age,qualification);
     }).then(function(result){
+      console.log("🚀 ~ file: app.js:225 ~ App.contracts.Contest.deployed ~ result:", result)
       $("#candidate_success").show();
       $('#name').val('');
       $('#age').val('');
       $('#party').val('');
       $('#qualification').val('');
+      console.log("🚀 ~ file: app.js:234 ~ App.contracts.Contest.deployed ~ $('#qualification').val('');:", $('#qualification').val(''))
+
     }).catch(function(err){
       console.error(err);
     })
