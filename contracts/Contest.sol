@@ -50,7 +50,7 @@ contract Contest{
     }
 
 	function addContestant(string memory _name , string memory _party , uint _age , string memory _qualification) public onlyAdmin validState(PHASE.reg){
-		// console.log("PHASE.reg",_age);
+
 		contestantsCount++;
 		contestants[contestantsCount]=Contestant(contestantsCount,_name,0,_party,_age,_qualification);
 	}
@@ -60,10 +60,10 @@ contract Contest{
 	}
 
 	function vote(uint _contestantId) public validState(PHASE.voting){
-        
-		require(voters[msg.sender].isRegistered);
+		require(!voters[msg.sender].isRegistered);
 		require(!voters[msg.sender].hasVoted);
         require(_contestantId > 0 && _contestantId<=contestantsCount);
+
 		contestants[_contestantId].voteCount++;
 		voters[msg.sender].hasVoted=true;
 		voters[msg.sender].vote=_contestantId;

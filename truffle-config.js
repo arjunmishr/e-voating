@@ -10,5 +10,10 @@ module.exports = {
     develop: {
       port: 8545
     }
+  },
+  solidityLog: {
+    displayPrefix: ' :', // defaults to ""
+    preventConsoleLogMigration: true, // defaults to false
   }
+
 };

@@ -25,7 +25,7 @@ App = {
   },
 
   initContract: async function() {
-    console.log("came to initContract function")
+    console.log("came to initContract function");
     let web3Provider = await detectEthereumProvider();
     $.getJSON("Contest.json", function(contest){
       App.contracts.Contest=TruffleContract(contest);
@@ -198,6 +198,7 @@ App = {
     
     var contestantId=id;
     App.contracts.Contest.deployed().then(function (instance){
+      console.log("🚀 ~ file: app.js:207 ~ contestantId:", contestantId)
       return instance.vote(contestantId,{from: App.account});
     }).then(function(result){
       // $("#test").hide();
@@ -220,8 +221,8 @@ App = {
     console.log(name, age, party,"he.lo", qualification);
 
     App.contracts.Contest.deployed().then(function(instance){
-      console.log("🚀 ~ file: app.js:222 ~ App.contracts.Contest.deployed ~ instance:", instance)
-      return instance.addContestant(name,party,age,qualification);
+      console.log("🚀 ~ file: app.js:222 ~ App.contracts.Contest.deployed ~ instance:",App.account)
+      return instance.addContestant(name,party,age,qualification, {from: App.account});
     }).then(function(result){
       console.log("🚀 ~ file: app.js:225 ~ App.contracts.Contest.deployed ~ result:", result)
       $("#candidate_success").show();
@@ -242,7 +243,7 @@ App = {
     phaseEnum ++;
     // console.log(phaseEnum);
     App.contracts.Contest.deployed().then(function(instance){
-      return instance.changeState(phaseEnum);
+      return instance.changeState(phaseEnum, {from: App.account});
     }).then(function(result){
       $("#content").hide();
       $("#loader").show();
